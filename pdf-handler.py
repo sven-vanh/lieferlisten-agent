@@ -8,17 +8,24 @@ import logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Function to get the PDF object safely
-def read_pdf(file_path: str) -> fitz.Document:
+def read_pdf(file_path: str, encoding: str = 'utf-8') -> fitz.Document:
     """Read a PDF file and return the PDF object
 
     Args:
         file_path (str): Path to the PDF file
+        encoding (str): PDF text encoding. Supported values:
+            - 'utf-8' (default)
+            - 'latin1' (iso-8859-1)
+            - 'ascii'
+            - 'utf-16'
+            - 'utf-32'
 
     Returns:
         fitz.Document: PDF object
     """
     try:
         pdf = fitz.open(file_path)
+        pdf.set_metadata({'encoding': encoding})
         return pdf
     except Exception as e:
         print(f"Error reading PDF {file_path}: {e}")
@@ -114,17 +121,18 @@ def copy_comments(comments, target_page, target_block):
 
 
 # Wrapper function to annotate the whole PDF
-def annotate_pdf(source_pdf_path: str, target_pdf_path: str, output_pdf_path: str) -> None:
+def annotate_pdf(source_pdf_path: str, target_pdf_path: str, output_pdf_path: str, encoding: str = 'utf-8') -> None:
     """Annotate the target PDF with comments from the source PDF
 
     Args:
         source_pdf_path (str): The path to the source PDF
         target_pdf_path (str): The path to the target PDF
         output_pdf_path (str): The path to save the annotated PDF
+        encoding (str): PDF text encoding (default: 'utf-8')
     """
     # Read the PDFs
-    source_pdf = read_pdf(source_pdf_path)
-    target_pdf = read_pdf(target_pdf_path)
+    source_pdf = read_pdf(source_pdf_path, encoding)
+    target_pdf = read_pdf(target_pdf_path, encoding)
 
     # Split the PDFs by bold text
     source_blocks = split_into_sections(source_pdf)
