@@ -1,3 +1,10 @@
+# Main Execution
+# This script provides a command-line interface for transferring annotations
+# between PDF documents using the AnnotationTransferAgent class.
+# Created by: Sven van Helten
+# Version: 1.0
+# Date Edited: 25.05.2025
+
 # Import dependencies
 from ata import AnnotationTransferAgent
 import logging

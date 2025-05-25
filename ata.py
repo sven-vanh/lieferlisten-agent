@@ -1,8 +1,16 @@
+# Annotation Transfer Agent
+# This module provides functionality to transfer annotations from one PDF document to another,
+# linking them to Order IDs found in the source document.
+# Created by: Sven van Helten
+# Version: 1.0
+# Date Edited: 25.05.2025
+
+# Import dependencies
 import fitz  # PyMuPDF
 import re
 import logging
 import math
-from typing import Dict, List, Tuple, Optional, NamedTuple
+from typing import Dict, List, Tuple, Optional
 from dataclasses import dataclass
 from pathlib import Path
 import sys
