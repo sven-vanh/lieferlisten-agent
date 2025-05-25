@@ -154,3 +154,4 @@ The agent handles various error conditions:
 - **Version**: 1.0
 - **Created by**: Sven van Helten
 - **Last Updated**: 25.05.2025
+- **License**: [MIT](LICENSE)
